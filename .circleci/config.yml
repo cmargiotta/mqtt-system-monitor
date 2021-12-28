@@ -17,11 +17,10 @@ jobs:
       - run: 
           name: Run tests
           command: ninja -C build test coverage-xml
+      - codecov/upload:
+          file: build/meson-logs/coverage.xml
 
 workflows:
   mqtt-system-monitor-workflow:
     jobs:
-      - build:
-          post-steps:
-            - codecov/upload:
-                file: build/meson-logs/coverage.xml
+      - build
