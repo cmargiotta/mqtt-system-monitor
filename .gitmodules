@@ -10,3 +10,6 @@
 [submodule "subprojects/sol2"]
 	path = subprojects/sol2
 	url = https://github.com/ThePhD/sol2
+[submodule "subprojects/catch2"]
+	path = subprojects/catch2
+	url = https://github.com/catchorg/Catch2
