@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: nychtelios/meson-build:0.3
+      - image: nychtelios/meson-build:latest
     steps:
       - checkout
       - run: git submodule sync --recursive
