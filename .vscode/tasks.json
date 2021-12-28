@@ -1,0 +1,22 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "ninja -C build test"
+		},
+		{
+			"label": "run",
+			"type": "shell",
+			"command": "ninja -C build && ${workspaceFolder}/build/src/inventory_bot"
+		},
+		{
+			"label": "build debug",
+			"type": "shell",
+			"command": "meson build --debug --reconfigure && ninja -C build"
+		}
+	]
+}
