@@ -5,7 +5,7 @@ cpp = meson.get_compiler('cpp')
 
 # Paho MQTT prerequisite
 message('Running Paho MQTT prerequisites')
-paho_pre = run_command('/usr/bin/bash', 'subprojects/paho_mqtt/install_paho_mqtt_c.sh')
+paho_pre = run_command('/bin/sh', 'subprojects/paho_mqtt/install_paho_mqtt_c.sh')
 message(paho_pre.stdout().strip())
 message('Errors:')
 message(paho_pre.stderr().strip())
