@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: mesonbuild/arch
+    steps:
+      - checkout
+      - run: 
+          name: Build
+          command: meson build
+      - run: 
+          name: Run tests
+          command: ninja -C build test
+
+workflows:
+  mqtt-system-monitor-workflow:
+    jobs:
+      - build
