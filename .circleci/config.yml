@@ -1,7 +1,7 @@
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@3.2.2
+orbs: 
+  coveralls: coveralls/coveralls@1.0.6
 
 jobs:
   build:
@@ -16,10 +16,9 @@ jobs:
           command: meson build -Db_coverage=true
       - run: 
           name: Run tests
-          command: ninja -C build test coverage
-      - run: cat build/meson-logs/coverage.txt
-      - codecov/upload:
-          file: build/meson-logs/coverage.xml
+          command: ninja -C build test coverage-xml
+      - coveralls/upload:
+          path_to_lcov: build/meson-logs/coverage.xml
 
 workflows:
   mqtt-system-monitor-workflow:
