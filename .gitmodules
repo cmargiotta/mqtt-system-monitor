@@ -7,3 +7,6 @@
 [submodule "subprojects/yaml_cpp"]
 	path = subprojects/yaml_cpp
 	url = https://github.com/jbeder/yaml-cpp
+[submodule "subprojects/sol2"]
+	path = subprojects/sol2
+	url = https://github.com/ThePhD/sol2
