@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: nychtelios/meson-build
+      - image: nychtelios/meson-build:0.2
     steps:
       - checkout
       - run: 
