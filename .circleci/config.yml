@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: mesonbuild/arch
+      - image: jpakkane/mesonci
     steps:
       - checkout
       - run: 
