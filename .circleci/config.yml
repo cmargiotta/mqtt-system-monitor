@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: jpakkane/mesonci
+      - image: nychtelios/meson-build
     steps:
       - checkout
       - run: 
