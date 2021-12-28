@@ -5,7 +5,9 @@ jobs:
     docker:
       - image: nychtelios/meson-build:0.3
     steps:
-      - checkout
+      - checkout:
+      - run: git submodule sync --recursive
+      - run: git submodule update --recursive --init
       - run: 
           name: Build
           command: meson build
