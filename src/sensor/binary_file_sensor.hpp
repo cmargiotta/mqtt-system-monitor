@@ -22,6 +22,7 @@ namespace msm
 
 		public:
 			explicit binary_file_sensor(const std::string& path):
+				sensor(path.substr(path.find_last_of("/") + 1)),
 				data(path, std::ifstream::in | std::ifstream::binary)
 			{
 				if (data.fail())
@@ -29,6 +30,7 @@ namespace msm
 					throw std::runtime_error("Invalid binary file sensor path.");
 				}
 			}
+			
 			~binary_file_sensor() = default; 
 
 			const std::string& get_value() override
