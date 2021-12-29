@@ -1,0 +1,15 @@
+update-period: 60
+
+mqtt-broker: 'localhost'
+
+lua-sensors: [
+  'lua1', 'lua2'
+]
+
+sensor-files: [
+  'sensor1', 'sensor2'
+]
+
+binary-sensor-files: [
+  'bin1', 'bin2'
+]

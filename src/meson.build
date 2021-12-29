@@ -1,1 +1,2 @@
 subdir('sensor')
+subdir('configuration')

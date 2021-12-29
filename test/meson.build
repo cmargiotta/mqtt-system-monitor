@@ -7,8 +7,21 @@ sensors_test = executable(
 	dependencies: [catch2, sensor]
 )
 
+configuration_test = executable(
+	'configuration_test', 
+	'configuration_test.cpp', 
+	link_with: test_main, 
+	dependencies: [catch2, configuration]
+)
+
 test(
 	'Sensors manager test', 
 	sensors_test,
+	workdir: meson.current_source_dir()
+)
+
+test(
+	'Config manager test', 
+	configuration_test,
 	workdir: meson.current_source_dir()
 )
