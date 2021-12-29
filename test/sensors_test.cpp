@@ -68,6 +68,19 @@ SCENARIO("Sensor interaction with human readable files")
 			}
 		}
 	}
+
+	GIVEN("A wrong sensor file path")
+	{
+		const string path("wrong_path");
+
+		WHEN("The sensor manager is initialized for it")
+		{
+			THEN("An exception is thrown")
+			{
+				REQUIRE_THROWS(new string_file_sensor(path));
+			}
+		}
+	}
 }
 
 SCENARIO("Sensor interaction with human binary files")
@@ -95,6 +108,19 @@ SCENARIO("Sensor interaction with human binary files")
 			THEN("It is empty")
 			{
 				REQUIRE(debug_message == "");
+			}
+		}
+	}
+
+	GIVEN("A wrong sensor file path")
+	{
+		const string path("wrong_path");
+
+		WHEN("The sensor manager is initialized for it")
+		{
+			THEN("An exception is thrown")
+			{
+				REQUIRE_THROWS(new binary_file_sensor<uint8_t>(path));
 			}
 		}
 	}
