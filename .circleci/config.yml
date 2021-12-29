@@ -3,9 +3,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: nychtelios/meson-build:0.2
+      - image: nychtelios/meson-build:0.3
     steps:
       - checkout
+      - run: git submodule sync --recursive
+      - run: git submodule update --recursive --init
       - run: 
           name: Build
           command: meson build
