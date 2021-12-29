@@ -19,9 +19,9 @@ SCENARIO("Sensor interaction with LUA scripts")
 
 			THEN("The produced data is correct correct")
 			{
-				REQUIRE(data.class_ == "test");
+				REQUIRE(data.class_ == "None");
 				REQUIRE(data.debug_message == "test");
-				REQUIRE(data.name == "test");
+				REQUIRE(data.name == "Test sensor");
 				REQUIRE(data.value == "15");
 			}
 		}
