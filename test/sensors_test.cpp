@@ -56,6 +56,17 @@ SCENARIO("Sensor interaction with human readable files")
 				REQUIRE(value == "1234");
 			}
 		}
+
+		WHEN("The debug message is requested")
+		{
+			sensor.get_value(); //Forcing update, this instance is different than the previous test
+			auto debug_message = sensor.get_debug_message();
+
+			THEN("It is empty")
+			{
+				REQUIRE(debug_message == "");
+			}
+		}
 	}
 }
 
@@ -73,6 +84,17 @@ SCENARIO("Sensor interaction with human binary files")
 			THEN("It is correct")
 			{
 				REQUIRE(value == "255");
+			}
+		}
+
+		WHEN("The debug message is requested")
+		{
+			sensor.get_value(); //Forcing update, this instance is different than the previous test
+			auto debug_message = sensor.get_debug_message();
+
+			THEN("It is empty")
+			{
+				REQUIRE(debug_message == "");
 			}
 		}
 	}
