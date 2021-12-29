@@ -1,150 +1,28 @@
 #include <string>
 #include <catch2/catch.hpp>
 
-#include "sensor/lua_sensor.hpp"
-#include "sensor/string_file_sensor.hpp"
-#include "sensor/binary_file_sensor.hpp"
+#include "sensor/sensor.hpp"
 
 using std::string;
-using msm::lua_sensor;
-using msm::string_file_sensor;
-using msm::binary_file_sensor;
+using msm::sensor;
 
 SCENARIO("Sensor interaction with LUA scripts")
 {
 	GIVEN("A LUA script producing sensor values")
 	{
 		const string path("sensor.lua");
-		lua_sensor sensor (path); 
+		sensor sensor (path); 
 
 		WHEN("A new value is requested")
 		{
-			auto value = sensor.get_value();
+			auto data = sensor.get_data();
 
-			THEN("It is correct")
+			THEN("The produced data is correct correct")
 			{
-				REQUIRE(value == "15");
-			}
-		}
-
-		WHEN("The debug message is requested")
-		{
-			sensor.get_value(); //Forcing update, this instance is different than the previous test
-			auto debug_message = sensor.get_debug_message();
-
-			THEN("It is correct")
-			{
-				REQUIRE(debug_message == "test");
-			}
-		}
-
-		WHEN("The sensor name is requested")
-		{
-			THEN("It is correctly parsed from script path")
-			{
-				REQUIRE(sensor.get_name() == "sensor");
-			}
-		}
-	}
-}
-
-SCENARIO("Sensor interaction with human readable files")
-{
-	GIVEN("A file with sensor data on it")
-	{
-		const string path("fake_string_sensor");
-		string_file_sensor sensor(path);
-
-		WHEN("The sensor name is requested")
-		{
-			THEN("It is correctly parsed from path")
-			{
-				REQUIRE(sensor.get_name() == "fake_string_sensor");
-			}
-		}
-
-		WHEN("A new value is requested")
-		{
-			auto value = sensor.get_value();
-
-			THEN("It is correct")
-			{
-				REQUIRE(value == "1234");
-			}
-		}
-
-		WHEN("The debug message is requested")
-		{
-			sensor.get_value(); //Forcing update, this instance is different than the previous test
-			auto debug_message = sensor.get_debug_message();
-
-			THEN("It is empty")
-			{
-				REQUIRE(debug_message == "");
-			}
-		}
-	}
-
-	GIVEN("A wrong sensor file path")
-	{
-		const string path("wrong_path");
-
-		WHEN("The sensor manager is initialized for it")
-		{
-			THEN("An exception is thrown")
-			{
-				REQUIRE_THROWS(new string_file_sensor(path));
-			}
-		}
-	}
-}
-
-SCENARIO("Sensor interaction with human binary files")
-{
-	GIVEN("A file with sensor data on it")
-	{
-		const string path("fake_binary_sensor");
-		binary_file_sensor<uint8_t> sensor(path);
-
-		WHEN("The sensor name is requested")
-		{
-			THEN("It is correctly parsed from path")
-			{
-				REQUIRE(sensor.get_name() == "fake_binary_sensor");
-			}
-		}
-
-		WHEN("A new value is requested")
-		{
-			auto value = sensor.get_value();
-
-			THEN("It is correct")
-			{
-				REQUIRE(value == "255");
-			}
-		}
-
-		WHEN("The debug message is requested")
-		{
-			sensor.get_value(); //Forcing update, this instance is different than the previous test
-			auto debug_message = sensor.get_debug_message();
-
-			THEN("It is empty")
-			{
-				REQUIRE(debug_message == "");
-			}
-		}
-	}
-
-	GIVEN("A wrong sensor file path")
-	{
-		const string path("wrong_path");
-
-		WHEN("The sensor manager is initialized for it")
-		{
-			THEN("An exception is thrown")
-			{
-				REQUIRE_THROWS(new binary_file_sensor<uint8_t>(path));
+				REQUIRE(data.class_ == "test");
+				REQUIRE(data.debug_message == "test");
+				REQUIRE(data.name == "test");
+				REQUIRE(data.value == "15");
 			}
 		}
 	}

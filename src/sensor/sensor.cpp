@@ -1,20 +1,32 @@
 #include "sensor.hpp"
 
+#include <fstream>
+
 using msm::sensor;
 using std::string; 
+using std::ifstream;
 
-sensor::sensor(const string& name_):
-	name(name_)
-{}
-
-const string& sensor::get_debug_message()
+sensor::sensor(const string& path)
 {
-	static const string empty_message;
+	ifstream script_file (path);
+	std::stringstream script_input;
+	script_input << script_file.rdbuf();
+	script += script_input.str(); 
 
-	return empty_message;
+	lua.new_usertype<sensor_>("sensor_", 
+								"value", &sensor_::value, 
+								"debug_message", &sensor_::debug_message,
+								"class", &sensor_::class_,
+								"name", &sensor_::name,
+								"id", &sensor_::id,
+								"unit", &sensor_::unit);
+
+	lua.open_libraries(sol::lib::base, sol::lib::io);
 }
 
-const string& sensor::get_name()
+sensor::sensor_ sensor::get_data()
 {
-	return name; 
+	lua.script(script);
+
+	return lua.get<sensor_>("sensor");;
 }

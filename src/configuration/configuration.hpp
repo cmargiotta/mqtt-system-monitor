@@ -14,8 +14,11 @@ namespace msm
 				std::vector<std::string> sensors;
 
 				unsigned update_period = 30; 
+				bool homeassistant = false;
+
 				std::string mqtt_broker; 
 				std::string client_id; 
+				std::string prefix = "mqtt-system-monitor"; 
 			};
 
 			data_ data;

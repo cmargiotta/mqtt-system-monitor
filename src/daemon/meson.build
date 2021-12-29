@@ -9,5 +9,5 @@ daemon_lib = static_library(
 daemon = declare_dependency(
 	link_with: daemon_lib,
 	include_directories: ['..'],
-	dependencies: [mqtt_wrapper]
+	dependencies: [mqtt_wrapper, sensor]
 )

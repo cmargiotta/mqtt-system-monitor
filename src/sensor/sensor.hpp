@@ -1,24 +1,37 @@
-#ifndef SENSOR_SENSOR_HPP
-#define SENSOR_SENSOR_HPP
+#ifndef SENSOR_sensor
+#define SENSOR_sensor
+
+#include "sensor.hpp"
 
 #include <string>
+#include <sol/sol.hpp>
 
 namespace msm
 {
-	class sensor
+	class sensor final
 	{
+		public:
+			struct sensor_
+			{
+				std::string name;
+				std::string id;
+				std::string class_;
+				std::string unit; 
+				
+				std::string value; 
+				std::string debug_message;
+			};
+			
 		private:
-			std::string name; 
+			std::string script = "sensor = sensor_.new()\n";
+			sol::state lua;
 
 		public:
-			sensor(const std::string& name);
-			virtual ~sensor() = default;
+			explicit sensor(const std::string& path);
+			~sensor() = default; 
 
-			const std::string& get_name();
-
-			virtual const std::string& get_value() = 0;
-			virtual const std::string& get_debug_message(); 
+			sensor_ get_data(); 
 	};
 }
 
-#endif /* SENSOR_SENSOR_HPP */
+#endif /* SENSOR_sensor */

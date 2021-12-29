@@ -23,6 +23,8 @@ configuration::configuration(const string& path)
 	auto period = yaml["update-period"];
 	auto broker = yaml["mqtt-broker"];
 	auto client_id = yaml["client-id"];
+	auto prefix = yaml["mqtt-prefix"];
+	auto homeassistant = yaml["homeassistant"];
 
 	if (!broker)
 	{
@@ -33,19 +35,26 @@ configuration::configuration(const string& path)
 
 	if (lua_sensors)
 	{
-		cout << "Lua sensor files setting found.\n";
 		data.sensors = lua_sensors.as<vector<string>>();
 	}
 
 	if (period)
 	{
-		cout << "Period setting found.\n";
 		data.update_period = period.as<decltype(data.update_period)>(); 
+	}
+
+	if (prefix)
+	{
+		data.prefix = prefix.as<string>(); 
+	}
+
+	if (homeassistant)
+	{
+		data.homeassistant = homeassistant.as<bool>(); 
 	}
 
 	if (client_id)
 	{
-		cout << "Client id setting found.\n";
 		data.client_id = client_id.as<string>(); 
 	}
 	else

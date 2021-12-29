@@ -1,2 +1,6 @@
 sensor.value = "15"
 sensor.debug_message = "test"
+sensor.name = "Test sensor"
+sensor.id = "test_sensor"
+sensor.unit = "%"
+sensor.class = "None"
