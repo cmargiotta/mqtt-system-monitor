@@ -17,13 +17,13 @@ namespace msm
 				std::string debug_message;
 			};
 
-			std::string script; 
+			std::string script = "sensor = sensor_.new()\n";
 			sol::state lua;
 
 			sensor_ last_data;
 
 		public:
-			explicit lua_sensor(const std::string& code);
+			explicit lua_sensor(const std::string& path);
 			~lua_sensor() = default; 
 
 			const std::string& get_value() override;

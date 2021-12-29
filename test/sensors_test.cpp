@@ -14,8 +14,8 @@ SCENARIO("Sensor interaction with LUA scripts")
 {
 	GIVEN("A LUA script producing sensor values")
 	{
-		const string script("sensor.value = \"15\"\nsensor.debug_message = \"test\"");
-		lua_sensor sensor (script); 
+		const string path("sensor.lua");
+		lua_sensor sensor (path); 
 
 		WHEN("A new value is requested")
 		{
@@ -37,6 +37,14 @@ SCENARIO("Sensor interaction with LUA scripts")
 				REQUIRE(debug_message == "test");
 			}
 		}
+
+		WHEN("The sensor name is requested")
+		{
+			THEN("It is correctly parsed from script path")
+			{
+				REQUIRE(sensor.get_name() == "sensor");
+			}
+		}
 	}
 }
 
@@ -46,6 +54,14 @@ SCENARIO("Sensor interaction with human readable files")
 	{
 		const string path("fake_string_sensor");
 		string_file_sensor sensor(path);
+
+		WHEN("The sensor name is requested")
+		{
+			THEN("It is correctly parsed from path")
+			{
+				REQUIRE(sensor.get_name() == "fake_string_sensor");
+			}
+		}
 
 		WHEN("A new value is requested")
 		{
@@ -89,6 +105,14 @@ SCENARIO("Sensor interaction with human binary files")
 	{
 		const string path("fake_binary_sensor");
 		binary_file_sensor<uint8_t> sensor(path);
+
+		WHEN("The sensor name is requested")
+		{
+			THEN("It is correctly parsed from path")
+			{
+				REQUIRE(sensor.get_name() == "fake_binary_sensor");
+			}
+		}
 
 		WHEN("A new value is requested")
 		{

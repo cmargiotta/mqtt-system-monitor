@@ -6,6 +6,7 @@ using std::string;
 using msm::string_file_sensor;
 
 string_file_sensor::string_file_sensor(const string& path):
+	sensor(path.substr(path.find_last_of("/") + 1)),
 	data(path)
 {
 	if (data.fail())
