@@ -21,14 +21,8 @@ SCENARIO("config.yml loading")
 
 			THEN("Data is correctly read")
 			{
-				REQUIRE_THAT(config->lua_sensors, 
+				REQUIRE_THAT(config->sensors, 
 								UnorderedEquals(vector<string>{"lua1", "lua2"}));
-				
-				REQUIRE_THAT(config->string_file_sensors, 
-								UnorderedEquals(vector<string>{"sensor1", "sensor2"}));
-
-				REQUIRE_THAT(config->binary_file_sensors, 
-								UnorderedEquals(vector<string>{"bin1", "bin2"}));
 
 				REQUIRE(config->mqtt_broker == "localhost");
 				REQUIRE(config->update_period == 60);

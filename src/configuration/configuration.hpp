@@ -11,9 +11,7 @@ namespace msm
 		private:
 			struct data_
 			{
-				std::vector<std::string> string_file_sensors;
-				std::vector<std::string> binary_file_sensors;
-				std::vector<std::string> lua_sensors;
+				std::vector<std::string> sensors;
 
 				unsigned update_period = 30; 
 				std::string mqtt_broker; 

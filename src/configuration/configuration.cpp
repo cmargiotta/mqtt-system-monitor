@@ -18,9 +18,7 @@ configuration::configuration(const string& path)
 
 	cout << "Loading config file.\n";
 
-	auto lua_sensors = yaml["lua-sensors"];
-	auto sensor_files = yaml["sensor-files"];
-	auto binary_sensor_files = yaml["binary-sensor-files"];
+	auto lua_sensors = yaml["sensors"];
 
 	auto period = yaml["update-period"];
 	auto broker = yaml["mqtt-broker"];
@@ -36,19 +34,7 @@ configuration::configuration(const string& path)
 	if (lua_sensors)
 	{
 		cout << "Lua sensor files setting found.\n";
-		data.lua_sensors = lua_sensors.as<vector<string>>();
-	}
-
-	if (sensor_files)
-	{
-		cout << "Sensor files setting found.\n";
-		data.string_file_sensors = sensor_files.as<vector<string>>();
-	}
-
-	if (binary_sensor_files)
-	{
-		cout << "Binary sensor files setting found.\n";
-		data.binary_file_sensors = binary_sensor_files.as<vector<string>>();
+		data.sensors = lua_sensors.as<vector<string>>();
 	}
 
 	if (period)

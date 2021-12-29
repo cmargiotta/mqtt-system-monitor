@@ -18,18 +18,11 @@ daemon::daemon(const string& path):
 	mqtt(config->mqtt_broker, config->client_id),
 	update_period(config->update_period)
 {
-	sensors.reserve(config->string_file_sensors.size() + 
-					config->binary_file_sensors.size() +
-					config->lua_sensors.size());
+	sensors.reserve(config->sensors.size());
 
-	for (const auto& sensor: config->lua_sensors)
+	for (const auto& sensor: config->sensors)
 	{
 		sensors.push_back(std::make_unique<lua_sensor>(sensor));
-	}
-
-	for (const auto& sensor: config->string_file_sensors)
-	{
-		sensors.push_back(std::make_unique<string_file_sensor>(sensor));
 	}
 
 	//Publishing ON state
