@@ -35,4 +35,17 @@ SCENARIO("config.yml loading")
 			}
 		}
 	}
+
+	GIVEN("A yaml config without a broker set")
+	{
+		const string path("config_test_no_broker.yml");
+
+		WHEN("The config file is parsed")
+		{
+			THEN("An exception is thrown")
+			{
+				REQUIRE_THROWS(new configuration(path)); 
+			}
+		}
+	}
 }

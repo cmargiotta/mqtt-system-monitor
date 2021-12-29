@@ -17,11 +17,11 @@ configuration_test = executable(
 test(
 	'Sensors manager test', 
 	sensors_test,
-	workdir: meson.current_source_dir()
+	workdir: meson.current_source_dir() + '/sensor_test_workdir'
 )
 
 test(
 	'Config manager test', 
 	configuration_test,
-	workdir: meson.current_source_dir()
+	workdir: meson.current_source_dir() + '/configuration_test_workdir'
 )
