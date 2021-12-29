@@ -1,5 +1,8 @@
 #include "configuration.hpp"
 
+#include <array>
+#include <unistd.h>
+#include <limits.h>
 #include <iostream>
 #include <exception>
 #include <yaml-cpp/yaml.h>
@@ -21,6 +24,7 @@ configuration::configuration(const string& path)
 
 	auto period = yaml["update-period"];
 	auto broker = yaml["mqtt-broker"];
+	auto client_id = yaml["client-id"];
 
 	if (!broker)
 	{
@@ -32,27 +36,39 @@ configuration::configuration(const string& path)
 	if (lua_sensors)
 	{
 		cout << "Lua sensor files setting found.\n";
-
 		data.lua_sensors = lua_sensors.as<vector<string>>();
 	}
 
 	if (sensor_files)
 	{
 		cout << "Sensor files setting found.\n";
-
 		data.string_file_sensors = sensor_files.as<vector<string>>();
 	}
 
 	if (binary_sensor_files)
 	{
 		cout << "Binary sensor files setting found.\n";
-
 		data.binary_file_sensors = binary_sensor_files.as<vector<string>>();
 	}
 
 	if (period)
 	{
+		cout << "Period setting found.\n";
 		data.update_period = period.as<decltype(data.update_period)>(); 
+	}
+
+	if (client_id)
+	{
+		cout << "Client id setting found.\n";
+		data.client_id = client_id.as<string>(); 
+	}
+	else
+	{
+		std::array<char, HOST_NAME_MAX> hostname;
+		gethostname(hostname.data(), HOST_NAME_MAX);
+		data.client_id = string(hostname.data());
+		
+		cout << "Client id not found, setting to: " << data.client_id << ".\n";
 	}
 }
 
