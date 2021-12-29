@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs: 
-  coveralls: coveralls/coveralls@1.0.6
+  codecov: codecov/codecov@3.2.2
 
 jobs:
   build:
@@ -9,18 +9,29 @@ jobs:
       - image: nychtelios/meson-build:latest
     steps:
       - checkout
+      - restore_cache:
+          keys: obj-cache
       - run: git submodule sync --recursive
       - run: git submodule update --recursive --init
       - run: 
           name: Build
-          command: meson build -Db_coverage=true
+          command: meson build -Db_coverage=true || true
       - run: 
           name: Run tests
-          command: ninja -C build test coverage-xml
-      - coveralls/upload:
-          path_to_lcov: build/meson-logs/coverage.xml
+          command: ninja -C build test
+      - save_cache:
+          key: obj-cache
+          paths:
+            - build
+      - run: 
+          name: Coverage
+          command: ninja -C build coverage
+      - run: cat build/meson-logs/coverage.txt
 
 workflows:
   mqtt-system-monitor-workflow:
     jobs:
-      - build
+      - build:
+          post-steps:
+            - codecov/upload:
+              file: build/meson-logs/coverage.txt
