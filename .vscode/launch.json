@@ -8,34 +8,14 @@
 			"name": "(gdb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/build/src/inventory_bot",
+			"program": "${workspaceFolder}/build/src/mqtt_system_monitor",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "gdb",
-			"envFile": "${workspaceFolder}/test.env",
-			"setupCommands": [
-				{
-				  "description": "Enable pretty-printing for gdb",
-				  "text": "-enable-pretty-printing",
-				  "ignoreFailures": true
-				}
-			  ],
-			  "preLaunchTask": "build debug"
-		},
-		{
-			"name": "(gdb) Debug inventory test",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/build/test/inventory_test",
-			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
+			"envFile": "",
 			"setupCommands": [
 				{
 				  "description": "Enable pretty-printing for gdb",

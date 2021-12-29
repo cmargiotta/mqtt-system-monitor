@@ -11,7 +11,7 @@
 		{
 			"label": "run",
 			"type": "shell",
-			"command": "ninja -C build && ${workspaceFolder}/build/src/inventory_bot"
+			"command": "ninja -C build && ${workspaceFolder}/build/src/mqtt_system_monitor"
 		},
 		{
 			"label": "build debug",
