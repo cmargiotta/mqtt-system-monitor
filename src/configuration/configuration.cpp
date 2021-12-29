@@ -35,10 +35,6 @@ configuration::configuration(const string& path)
 
 		data.lua_sensors = lua_sensors.as<vector<string>>();
 	}
-	else
-	{
-		cout << "No lua sensor files set.\n";
-	}
 
 	if (sensor_files)
 	{
@@ -46,20 +42,12 @@ configuration::configuration(const string& path)
 
 		data.string_file_sensors = sensor_files.as<vector<string>>();
 	}
-	else
-	{
-		cout << "No sensor files set.\n";
-	}
 
 	if (binary_sensor_files)
 	{
 		cout << "Binary sensor files setting found.\n";
 
 		data.binary_file_sensors = binary_sensor_files.as<vector<string>>();
-	}
-	else
-	{
-		cout << "No binary sensor files set.\n";
 	}
 
 	if (period)
