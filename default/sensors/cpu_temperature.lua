@@ -1,6 +1,6 @@
 local open = io.open
 
-local file = open("cat /sys/class/hwmon/hwmon4/temp1_input", "r") 
+local file = open("/sys/class/hwmon/hwmon4/temp1_input", "r") 
 local content = file:read() --first line
 
 file:close()
