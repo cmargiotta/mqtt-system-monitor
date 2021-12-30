@@ -1,0 +1,4 @@
+[wrap-git]
+clone-recursive = true
+url = https://github.com/ThePhD/sol2.git
+revision = a7da2a8
