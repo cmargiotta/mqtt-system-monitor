@@ -31,8 +31,7 @@ daemon::daemon(const string& path):
 	}
 
 	//Publishing ON state
-	auto topic = prefix + "/state";
-	mqtt.publish(topic, "online");
+	notify_state(true);
 }
 
 void daemon::homeassistant_register_state()
@@ -41,11 +40,13 @@ void daemon::homeassistant_register_state()
 
 	topic << "homeassistant/binary_sensor/" << config->client_id << "_state/config";
 
-	json 	<< "{\"name\": \"State\","
-			<< "\"device_class\": \"connectivity\","
+	json 	<< "{\"name\": \"" 
+			<< config->client_id << " - State\","
+			<< "\"class\": \"connectivity\","
 			<< "\"device\": {\"name\": \"" << config->client_id << "\", " 
 			<< "\"model\": \"" << config->client_id << "\", " 
 			<< "\"identifiers\": \"" << config->client_id << "\"}, " 
+			<< "\"expire_after\": " << HOME_ASSISTANT_EXPIRE_AFTER << ", "
 			<< "\"state_topic\": \"" <<
 				prefix << "/state\","
 			<< "\"unique_id\": \"" << config->client_id << "_state\"}";
@@ -57,10 +58,11 @@ void daemon::homeassistant_register_sensor(msm::sensor::sensor_& data)
 {
 	std::stringstream json, topic;
 
-	topic << "homeassistant/" << data.class_ << "/" << config->client_id << '_' << data.id << "/config";
+	topic << "homeassistant/sensor/" << config->client_id << '_' << data.id << "/config";
 
 	json 	<< "{\"name\": \""
-	 		<< data.name << "\", ";
+	 		<< config->client_id << " - " << data.name << "\", "
+			<< "\"class\": \"" << data.class_ << "\",";
 
 	if (data.unit.size() != 0)
 	{
@@ -90,16 +92,15 @@ void daemon::homeassistant_register()
 	}
 }
 
-void daemon::notify_off_state()
+void daemon::notify_state(bool state)
 {
-	cout << "Goodbye\n";
 	auto topic = prefix + "/state";
-	mqtt.publish(topic, "offline");
+	mqtt.publish(topic, state ? "ON" : "OFF");
 }
 
 daemon::~daemon()
 {
-	notify_off_state();
+	notify_state(false);
 }
 
 void daemon::run()
@@ -109,7 +110,9 @@ void daemon::run()
 
 	while (true)
 	{
-		if (cycle_count > config->update_period/HOME_ASSISTANT_EXPIRE_AFTER
+		notify_state(true);
+
+		if (cycle_count >= config->update_period/HOME_ASSISTANT_EXPIRE_AFTER
 			&& config->homeassistant)
 		{
 			homeassistant_register_state();

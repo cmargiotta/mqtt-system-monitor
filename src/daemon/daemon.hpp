@@ -34,7 +34,7 @@ namespace msm
 			~daemon();
 
 			void run(); 
-			void notify_off_state();
+			void notify_state(bool state = true);
 	};
 }
 

@@ -8,7 +8,7 @@ void signal_received(int)
 {
 	if (daemon_ptr)
 	{
-		daemon_ptr->notify_off_state();
+		daemon_ptr->notify_state(false);
 	}
 
 	exit(0);
