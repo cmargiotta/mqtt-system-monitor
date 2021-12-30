@@ -1,6 +1,1 @@
-[submodule "subprojects/paho_mqtt"]
-	path = subprojects/paho_mqtt
-	url = https://github.com/eclipse/paho.mqtt.cpp
-[submodule "subprojects/luacpp"]
-	path = subprojects/luacpp
-	url = https://github.com/jordanvrtanoski/luacpp
+
