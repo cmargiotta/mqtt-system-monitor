@@ -15,7 +15,7 @@ mqtt-broker: 'localhost:1883'
 #sensors: []
 
 ### Home Assistant
-#   if true the device will be discovered by an 
+#   if true the device will be discovered by an
 #   Home Assistant instance connected to the same MQTT broker
 #   default: false
 #homeassistant: false
