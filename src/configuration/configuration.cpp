@@ -53,7 +53,7 @@ configuration::configuration(const string& path)
 		data.homeassistant = homeassistant.as<bool>(); 
 	}
 
-	if (client_id)
+	if (client_id && !client_id.as<string>().empty())
 	{
 		data.client_id = client_id.as<string>(); 
 	}
