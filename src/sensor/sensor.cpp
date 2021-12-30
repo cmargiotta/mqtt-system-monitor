@@ -21,7 +21,7 @@ sensor::sensor(const string& path)
 								"id", &sensor_::id,
 								"unit", &sensor_::unit);
 
-	lua.open_libraries(sol::lib::base, sol::lib::io);
+	lua.open_libraries(sol::lib::base, sol::lib::io, sol::lib::string, sol::lib::os, sol::lib::table);
 }
 
 sensor::sensor_ sensor::get_data()
