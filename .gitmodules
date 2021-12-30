@@ -4,6 +4,3 @@
 [submodule "subprojects/luacpp"]
 	path = subprojects/luacpp
 	url = https://github.com/jordanvrtanoski/luacpp
-[submodule "subprojects/yaml_cpp"]
-	path = subprojects/yaml_cpp
-	url = https://github.com/jbeder/yaml-cpp

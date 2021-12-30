@@ -1,0 +1,4 @@
+[wrap-git]
+directory = yaml_cpp
+url = https://github.com/jbeder/yaml-cpp.git
+revision = d8d9419

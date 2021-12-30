@@ -12,14 +12,14 @@ paho_mqtt_pro = cmake.subproject('paho_mqtt', options: paho_mqtt_options)
 yaml_pro = cmake.subproject('yaml_cpp')
 
 # Meson subprojects
-sol2_proj = subproject('sol2')
-catch2_proj = subproject('catch2')
+sol2_pro = subproject('sol2')
+catch2_pro = subproject('catch2')
 
 # Dependencies
 paho_mqtt = paho_mqtt_pro.dependency('paho-mqttpp3-static')
+sol2 = sol2_pro.get_variable('sol2_dep')
+catch2 = catch2_pro.get_variable('catch2_dep')
 yaml = yaml_pro.dependency('yaml_cpp')
-sol2 = sol2_proj.get_variable('sol2_dep')
-catch2 = catch2_proj.get_variable('catch2_dep')
 
 subdir('src')
 subdir('test')
