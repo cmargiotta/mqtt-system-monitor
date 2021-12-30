@@ -55,13 +55,9 @@ And the debug message on:
 
 `prefix/client_id/sensor.class/sensor.id-debug`
 
-
-
 `prefix` is read from the config, the default value is `mqtt-system-monitor`
 
 `client_id` is read from the config, the default value is the current system hostname
-
-
 
 If the `homeassistant` flag in the config is set to true, a JSON Home Assistant config for this sensor will be periodically published on the topic:
 
@@ -87,6 +83,8 @@ The JSON will be:
 
 The `expire_after` value makes sensors unavailable if the system is unreachable.
 
+For `sensor.class` possible values refere to the Home Assistant [documentation](https://www.home-assistant.io/integrations/sensor/).
+
 ## State
 
 When the daemon goes online, it publishes on
@@ -94,8 +92,6 @@ When the daemon goes online, it publishes on
 `prefix/client_id/state`
 
 The value `Online`, with the relative JSON configuration for Home Assistant, if needed.
-
-
 
 When `SIGINT` or `SIGKILL` is received the `Offline` state is published.
 

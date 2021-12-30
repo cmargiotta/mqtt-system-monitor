@@ -11,7 +11,7 @@ mqtt-broker: 'localhost:1883'
 ### Sensors
 #   A list of enabled sensors
 #   default: []
-#   example: ['cpu_load.lua']
+#   example: ['cpu_load']
 #sensors: []
 
 ### Home Assistant

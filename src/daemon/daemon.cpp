@@ -22,7 +22,7 @@ daemon::daemon(const string& path):
 	for (const string& s: config->sensors)
 	{
 		string path ("/etc/msm/sensors/");
-		sensors.push_back(std::make_unique<sensor>(path + s));
+		sensors.push_back(std::make_unique<sensor>(path + s + ".lua"));
 	}
 
 	if (config->homeassistant)
