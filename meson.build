@@ -33,5 +33,3 @@ subdir('test')
 
 install_data('msm.service', install_dir: '/usr/lib/systemd/system/')
 install_subdir('default/sensors/', install_dir: '/etc/msm/')
-
-meson.add_install_script('install.sh')
