@@ -6,7 +6,7 @@
 		{
 			"label": "build",
 			"type": "shell",
-			"command": "ninja -C build test"
+			"command": "ninja -C build"
 		},
 		{
 			"label": "run",
@@ -16,7 +16,7 @@
 		{
 			"label": "build debug",
 			"type": "shell",
-			"command": "meson build --debug --reconfigure && ninja -C build"
+			"command": "meson build --debug || true && ninja -C build"
 		}
 	]
 }

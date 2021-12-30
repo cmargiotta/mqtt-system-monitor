@@ -1,0 +1,12 @@
+[Unit]
+Description=MQTT System Monitor
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/msm
+
+[Install]
+WantedBy=multi-user.target

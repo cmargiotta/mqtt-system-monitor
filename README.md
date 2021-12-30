@@ -24,6 +24,8 @@ sudo meson install
 
 ## Configuration
 
+The configuration is stored in `/etc/msm/config.yml` by default, but it is possible to use another path passing it as the first argument of the executable.
+
 A default `config.yml` is provided in `default/config.yml`.
 
 The only required setting is `mqtt-broker`, that must be the full address of the MQTT broker.

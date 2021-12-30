@@ -4,6 +4,8 @@ subdir('configuration')
 
 subdir('daemon')
 
-executable('mqtt_system_monitor', 
+executable('msm', 
 			dependencies: [daemon], 
-			sources: ['main.cpp'])
+			sources: ['main.cpp'], 
+			install: true, 
+			install_dir: '/usr/bin/')

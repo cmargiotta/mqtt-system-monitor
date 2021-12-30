@@ -1,0 +1,31 @@
+### Update period
+#   how often the sensors data will be published on MQTT
+#   default: 10 (seconds)
+#update-period: 10
+
+### MQTT Broker
+#   The MQTT broker address
+#   default: localhost:1883
+mqtt-broker: 'localhost:1883'
+
+### Sensors
+#   A list of enabled sensors
+#   default: []
+#   example: ['cpu_load.lua']
+#sensors: []
+
+### Home Assistant
+#   if true the device will be discovered by an 
+#   Home Assistant instance connected to the same MQTT broker
+#   default: false
+#homeassistant: false
+
+### Prefix
+#   the topic prefix
+#   default: mqtt-system-monitor
+#prefix: 'mqtt-system-monitor'
+
+### Client ID
+#   the identifier of this machine, defaults to hostname
+#   default: ''
+#client-id: ''

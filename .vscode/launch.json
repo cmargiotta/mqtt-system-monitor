@@ -8,7 +8,7 @@
 			"name": "(gdb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/build/src/mqtt_system_monitor",
+			"program": "${workspaceFolder}/build/src/msm",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
@@ -22,8 +22,8 @@
 				  "text": "-enable-pretty-printing",
 				  "ignoreFailures": true
 				}
-			  ],
-			  "preLaunchTask": "build debug"
+			],
+			"preLaunchTask": "build debug"
 		}
 	]
 }
