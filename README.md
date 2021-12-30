@@ -34,7 +34,7 @@ Other options are described in the default `config.yml`.
 
 ## Building a sensor
 
-It is possible to add new sensors simply writing their Lua scripts and placing them in `/etc/msm/sensors/`.
+It is possible to add new sensors simply writing their Lua scripts. For this kind of sensors it is needed to provide the absolute path in the `sensors` field of the config.
 
 A sensor script have a prebuilt `sensor` table that must be filled with data that will be published on MQTT. In particular:
 
