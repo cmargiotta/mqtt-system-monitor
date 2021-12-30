@@ -19,9 +19,10 @@ daemon::daemon(const string& path):
 {
 	sensors.reserve(config->sensors.size());
 
-	for (const auto& s: config->sensors)
+	for (const string& s: config->sensors)
 	{
-		sensors.push_back(std::make_unique<sensor>(s));
+		string path ("/etc/msm/sensors/");
+		sensors.push_back(std::make_unique<sensor>(path + s));
 	}
 
 	if (config->homeassistant)
@@ -31,7 +32,7 @@ daemon::daemon(const string& path):
 
 	//Publishing ON state
 	auto topic = prefix + "/state";
-	mqtt.publish(topic, "Online");
+	mqtt.publish(topic, "online");
 }
 
 void daemon::homeassistant_register_state()
@@ -41,11 +42,10 @@ void daemon::homeassistant_register_state()
 	topic << "homeassistant/binary_sensor/" << config->client_id << "_state/config";
 
 	json 	<< "{\"name\": \"State\","
-			<< "\"device_class\": \"connectivity\", \"payload_off\": \"Offline\", \"payload_on\": \"Online\","
+			<< "\"device_class\": \"connectivity\","
 			<< "\"device\": {\"name\": \"" << config->client_id << "\", " 
 			<< "\"model\": \"" << config->client_id << "\", " 
 			<< "\"identifiers\": \"" << config->client_id << "\"}, " 
-			<< "\"expire_after\": " << HOME_ASSISTANT_EXPIRE_AFTER << ", "
 			<< "\"state_topic\": \"" <<
 				prefix << "/state\","
 			<< "\"unique_id\": \"" << config->client_id << "_state\"}";
@@ -70,6 +70,7 @@ void daemon::homeassistant_register_sensor(msm::sensor::sensor_& data)
 	json	<< "\"device\": {\"name\": \"" << config->client_id << "\", " 
 			<< "\"model\": \"" << config->client_id << "\", " 
 			<< "\"identifiers\": \"" << config->client_id << "\"}, "
+			<< "\"expire_after\": " << HOME_ASSISTANT_EXPIRE_AFTER << ", "
 			<< "\"state_topic\": \"" <<
 				prefix << '/' << data.class_ << '/' << data.id << "\","
 			<< "\"unique_id\": \"" << config->client_id << '_' << data.id << "\"}";
@@ -93,7 +94,7 @@ void daemon::notify_off_state()
 {
 	cout << "Goodbye\n";
 	auto topic = prefix + "/state";
-	mqtt.publish(topic, "Offline");
+	mqtt.publish(topic, "offline");
 }
 
 daemon::~daemon()
