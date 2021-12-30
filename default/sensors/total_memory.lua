@@ -9,6 +9,6 @@ local usage = total/1000000
 sensor.value = string.format("%.2f", total)
 sensor.debug_message = ""
 sensor.name = "Total emory"
-sensor.id = "mem_usage"
+sensor.id = "total_mem"
 sensor.unit = "GB"
 sensor.class = "None"

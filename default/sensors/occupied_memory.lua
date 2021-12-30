@@ -9,6 +9,6 @@ local memory = (total - free)/1000000
 sensor.value = string.format("%.2f", memory)
 sensor.debug_message = ""
 sensor.name = "Occupied memory"
-sensor.id = "mem_usage"
+sensor.id = "occupied_mem"
 sensor.unit = "GB"
 sensor.class = "None"
