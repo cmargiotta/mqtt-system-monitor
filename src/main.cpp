@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	}
 	else 
 	{
-		path = "~/.config/mqtt-system-monitor/config.yml";
+		path = "/etc/msm/config.yml";
 	}
 
 	struct sigaction sigaction_;
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	sigaction_.sa_handler = signal_received;
 	sigfillset(&sigaction_.sa_mask);
 	sigaction(SIGINT, &sigaction_, nullptr);
-	sigaction(SIGKILL, &sigaction_, nullptr);
+	sigaction(SIGTERM, &sigaction_, nullptr);
 
 	msm::daemon daemon(path);
 	daemon_ptr = &daemon; 
