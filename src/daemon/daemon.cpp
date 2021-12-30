@@ -69,8 +69,7 @@ void daemon::homeassistant_register_sensor(msm::sensor::sensor_& data)
 
 	json	<< "\"device\": {\"name\": \"" << config->client_id << "\", " 
 			<< "\"model\": \"" << config->client_id << "\", " 
-			<< "\"identifiers\": \"" << config->client_id << "\"}, " 
-			<< "\"expire_after\": " << HOME_ASSISTANT_EXPIRE_AFTER << ", "
+			<< "\"identifiers\": \"" << config->client_id << "\"}, "
 			<< "\"state_topic\": \"" <<
 				prefix << '/' << data.class_ << '/' << data.id << "\","
 			<< "\"unique_id\": \"" << config->client_id << '_' << data.id << "\"}";
