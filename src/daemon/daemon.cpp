@@ -41,7 +41,7 @@ void daemon::homeassistant_register_state()
 	topic << "homeassistant/binary_sensor/" << config->client_id << "_state/config";
 
 	json 	<< "{\"name\": \"" 
-			<< config->client_id << " - State\","
+			<< config->client_id << " State\","
 			<< "\"class\": \"connectivity\","
 			<< "\"device\": {\"name\": \"" << config->client_id << "\", " 
 			<< "\"model\": \"" << config->client_id << "\", " 
@@ -61,7 +61,7 @@ void daemon::homeassistant_register_sensor(msm::sensor::sensor_& data)
 	topic << "homeassistant/sensor/" << config->client_id << '_' << data.id << "/config";
 
 	json 	<< "{\"name\": \""
-	 		<< config->client_id << " - " << data.name << "\", "
+	 		<< config->client_id << ' ' << data.name << "\", "
 			<< "\"class\": \"" << data.class_ << "\",";
 
 	if (data.unit.size() != 0)
