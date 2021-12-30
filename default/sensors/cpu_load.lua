@@ -30,7 +30,7 @@ end
 
 local load = 100 - (idle * 100)/(user + nice + system + idle + iowait + irq + softirq + steal + guest + guest_nice)
 
-sensor.value = tostring(load)
+sensor.value = string.format("%.3f", load)
 sensor.debug_message = ""
 sensor.name = "CPU Load"
 sensor.id = "cpu_load"
