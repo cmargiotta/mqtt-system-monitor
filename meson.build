@@ -3,13 +3,6 @@ project('mqtt_system_monitor', 'cpp', default_options: ['cpp_std=c++17'])
 cmake = import('cmake')
 cpp = meson.get_compiler('cpp')
 
-# Paho MQTT prerequisite
-message('Running Paho MQTT prerequisites')
-paho_pre = run_command('/bin/sh', 'subprojects/paho_mqtt/install_paho_mqtt_c.sh')
-message(paho_pre.stdout().strip())
-message('Errors:')
-message(paho_pre.stderr().strip())
-
 # Subprojects options
 paho_mqtt_options = cmake.subproject_options()
 paho_mqtt_options.add_cmake_defines({'PAHO_BUILD_STATIC': true})
