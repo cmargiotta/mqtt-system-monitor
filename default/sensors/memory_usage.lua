@@ -2,9 +2,10 @@ local open = io.open
 
 local file = open("/proc/meminfo", "r") 
 local total = string.match(file:read(), "%d+") --first line
-local free = string.match(file:read(), "%d+") --second line
+file:read()
+local avail = string.match(file:read(), "%d+") --third line
 
-local usage = 100 - (100*free/total)
+local usage = 100 - (100*avail/total)
 
 sensor.value = string.format("%.2f", usage)
 sensor.debug_message = ""
