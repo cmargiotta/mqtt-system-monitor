@@ -8,8 +8,8 @@ paho_mqtt_options = cmake.subproject_options()
 paho_mqtt_options.add_cmake_defines({'PAHO_BUILD_STATIC': true})
 
 # Cmake subprojects
-paho_mqtt_pro = cmake.subproject('paho_mqtt', options: paho_mqtt_options)
 yaml_pro = cmake.subproject('yaml_cpp')
+paho_mqtt_pro = cmake.subproject('paho_mqtt', options: paho_mqtt_options)
 
 # Meson subprojects
 sol2_pro = subproject('sol2')
