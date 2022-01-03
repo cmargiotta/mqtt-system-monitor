@@ -7,8 +7,8 @@ MSM is a daemon that periodically reads PC sensors values and publishes them on 
 ## Building from source
 
 ```console
-git clone https://github.com/cmargiotta/MQTT-System-Monitor --recursive
-cd MQTT-System-Monitor
+git clone https://github.com/cmargiotta/mqtt-system-monitor --recursive
+cd mqtt-system-monitor
 meson build
 ninja -C build test
 ```
@@ -19,7 +19,21 @@ To install msm, the systemd service, the default sensors and the default config.
 
 ```console
 cd build
-sudo meson install
+```
+
+## Installing
+
+You can install using meson: 
+
+```console
+cd mqtt-system-monitor
+sudo meson install -C build
+```
+
+If you are using Arch, the last release is [available](https://aur.archlinux.org/packages/mqtt-system-monitor/) on AUR. If you are using yay you can simply run:
+
+```console
+yay -S mqtt-system-monitor
 ```
 
 ## Configuration
