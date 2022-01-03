@@ -25,12 +25,14 @@ namespace msm
 		private:
 			std::string script = "sensor = sensor_.new()\n";
 			sol::state lua;
+			std::string path; 
 
 		public:
 			explicit sensor(const std::string& path);
 			~sensor() = default; 
 
 			sensor_ get_data(); 
+			const std::string& get_path(); 
 	};
 }
 

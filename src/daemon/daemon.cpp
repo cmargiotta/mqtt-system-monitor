@@ -1,5 +1,6 @@
 #include "daemon.hpp"
 
+#include <stdexcept>
 #include <thread>
 #include <fstream>
 #include <iostream>
@@ -104,9 +105,15 @@ void daemon::homeassistant_register()
 
 	for (auto& sensor: sensors)
 	{
-		auto data = sensor->get_data(); 
-
-		homeassistant_register_sensor(data);
+		try
+		{
+			auto data = sensor->get_data(); 
+			homeassistant_register_sensor(data);
+		}
+		catch (...)
+		{
+			continue; 
+		}
 	}
 }
 
@@ -141,18 +148,25 @@ void daemon::run()
 
 		for (auto& sensor: sensors)
 		{
-			auto data = sensor->get_data();
-			mqtt.publish(prefix + "/" + data.class_ + "/" + data.id, data.value); 
-
-			if (!data.debug_message.empty())
+			try 
 			{
-				auto debug_topic = prefix + "/" + data.class_ + "/" + data.id + "-debug";
-				mqtt.publish(debug_topic, data.debug_message);
+				auto data = sensor->get_data();
+				mqtt.publish(prefix + "/" + data.class_ + "/" + data.id, data.value); 
+
+				if (!data.debug_message.empty())
+				{
+					auto debug_topic = prefix + "/" + data.class_ + "/" + data.id + "-debug";
+					mqtt.publish(debug_topic, data.debug_message);
+				}
+
+				if (homeassistant_reregister)
+				{
+					homeassistant_register_sensor(data);
+				}
 			}
-
-			if (homeassistant_reregister)
+			catch (std::runtime_error& error)
 			{
-				homeassistant_register_sensor(data);
+				std::cout << "Error occurred for sensor " << sensor->get_path() << ": " << error.what() << '\n';
 			}
 		}
 
