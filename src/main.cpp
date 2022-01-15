@@ -1,7 +1,11 @@
 #include "daemon/daemon.hpp"
 
 #include <string>
+#include <chrono>
+#include <thread>
 #include <signal.h>
+
+using namespace std::chrono_literals;
 
 msm::daemon* daemon_ptr = nullptr; 
 void signal_received(int)
@@ -34,7 +38,19 @@ int main(int argc, char *argv[])
 	sigaction(SIGINT, &sigaction_, nullptr);
 	sigaction(SIGTERM, &sigaction_, nullptr);
 
-	msm::daemon daemon(path);
-	daemon_ptr = &daemon; 
-	daemon.run(); 
+	while (true)
+	{
+		try 
+		{
+			//Trying to start the daemon
+			msm::daemon daemon(path);
+			daemon_ptr = &daemon; 
+			daemon.run(); 
+		}
+		catch(...)
+		{
+			//An error occurred, retry after a second
+			std::this_thread::sleep_for(1000ms); 
+		}
+	}
 }
