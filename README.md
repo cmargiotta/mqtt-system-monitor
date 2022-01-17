@@ -1,6 +1,6 @@
 # MQTT-System-Monitor (MSM)
 
-[![CircleCI](https://img.shields.io/circleci/build/github/cmargiotta/mqtt-system-monitor/main?style=for-the-badge)](https://circleci.com/gh/cmargiotta/mqtt-system-monitor/tree/main) [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/cmargiotta/mqtt-system-monitor?style=for-the-badge)](https://www.codefactor.io/repository/github/cmargiotta/mqtt-system-monitor/overview/main)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/cmargiotta/mqtt-system-monitor?style=for-the-badge)](https://www.codefactor.io/repository/github/cmargiotta/mqtt-system-monitor/overview/main)
 
 MSM is a daemon that periodically reads PC sensors values and publishes them on an MQTT broker. Its main feature is the modularity, obtained with the dynamic loading of sensors: a sensor is simply a Lua script that parses sensors' data.
 
