@@ -5,7 +5,7 @@ cpp = meson.get_compiler('cpp')
 
 # Subprojects options
 paho_mqtt_options = cmake.subproject_options()
-paho_mqtt_options.add_cmake_defines({'PAHO_BUILD_STATIC': true})
+paho_mqtt_options.add_cmake_defines({'PAHO_BUILD_STATIC': true, 'PAHO_BUILD_SHARED': false, 'CMAKE_PREFIX_PATH': '/usr/local/lib'})
 
 # Cmake subprojects
 paho_mqtt_pro = cmake.subproject('paho_mqtt', options: paho_mqtt_options)
