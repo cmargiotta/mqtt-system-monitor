@@ -8,7 +8,7 @@ local memory = total/1000000
 
 sensor.value = string.format("%.2f", memory)
 sensor.debug_message = ""
-sensor.name = "Total emory"
+sensor.name = "Total memory"
 sensor.id = "total_mem"
 sensor.unit = "GB"
 sensor.class = "None"
