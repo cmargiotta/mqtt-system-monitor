@@ -2,10 +2,12 @@
 
 using std::string;
 
-msm::mqtt_wrapper::mqtt_wrapper(const string& address, const string& client_id)
+msm::mqtt_wrapper::mqtt_wrapper(const string& user, const string& password, const string& address, const string& client_id)
     : client_(address, client_id, MAX_BUFFERED_MSGS)
 {
     auto connection_options = ::mqtt::connect_options_builder()
+                                  .user_name(user)
+                                  .password(password)
                                   .keep_alive_interval(MAX_BUFFERED_MSGS * PERIOD)
                                   .clean_session(true)
                                   .automatic_reconnect(true)

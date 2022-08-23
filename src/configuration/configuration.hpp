@@ -17,6 +17,8 @@ namespace msm
                     bool     homeassistant = false;
 
                     std::string mqtt_broker;
+                    std::string mqtt_user;
+                    std::string mqtt_password;
                     std::string client_id;
                     std::string prefix = "mqtt-system-monitor";
             };

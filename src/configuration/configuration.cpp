@@ -21,11 +21,13 @@ configuration::configuration(const string& path)
 
     auto lua_sensors = yaml["sensors"];
 
-    auto period        = yaml["update-period"];
-    auto broker        = yaml["mqtt-broker"];
-    auto client_id     = yaml["client-id"];
-    auto prefix        = yaml["mqtt-prefix"];
-    auto homeassistant = yaml["homeassistant"];
+    auto period         = yaml["update-period"];
+    auto broker         = yaml["mqtt-broker"];
+    auto user           = yaml["mqtt-user"];
+    auto password       = yaml["mqtt-password"];
+    auto client_id      = yaml["client-id"];
+    auto prefix         = yaml["mqtt-prefix"];
+    auto homeassistant  = yaml["homeassistant"];
 
     if (!broker)
     {
@@ -33,6 +35,16 @@ configuration::configuration(const string& path)
     }
 
     data.mqtt_broker = broker.as<string>();
+
+    if (user)
+    {
+        data.mqtt_user = user.as<string>();
+    }
+
+    if (password)
+    {
+        data.mqtt_password = password.as<string>();
+    }
 
     if (lua_sensors)
     {

@@ -13,7 +13,7 @@ using std::string;
 
 daemon::daemon(const string& path)
     : config(path),
-      mqtt(config->mqtt_broker, config->client_id),
+      mqtt(config->mqtt_user,config->mqtt_password,config->mqtt_broker, config->client_id),
       prefix(config->prefix + "/" + config->client_id),
       update_period(config->update_period)
 {
