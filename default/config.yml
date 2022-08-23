@@ -7,6 +7,8 @@
 #   The MQTT broker address
 #   default: localhost:1883
 mqtt-broker: 'localhost:1883'
+#mqtt-user: ''
+#mqtt-password: ''
 
 ### Sensors
 #   A list of enabled sensors

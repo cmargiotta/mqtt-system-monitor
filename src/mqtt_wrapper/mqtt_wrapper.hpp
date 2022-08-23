@@ -21,7 +21,7 @@ namespace msm
             static constexpr int  DEFAULT_QOS       = 0;
 
         public:
-            mqtt_wrapper(const std::string& address, const std::string& client_id);
+            mqtt_wrapper(const std::string& user, const std::string& password, const std::string& address, const std::string& client_id);
 
             void publish(const std::string& topic, const std::string& message);
     };
