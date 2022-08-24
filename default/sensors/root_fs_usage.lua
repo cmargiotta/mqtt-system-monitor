@@ -8,9 +8,9 @@ do
 end
 results:close()
 
-sensor.value = tostring(content)
+sensor.value = string.format("%.1f", content)
 sensor.debug_message = ""
-sensor.name = "Disk usage"
-sensor.id = "disk_usage"
+sensor.name = "Root FS usage"
+sensor.id = "root_fs_usage"
 sensor.unit = "%"
 sensor.class = "None"
