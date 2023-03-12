@@ -1,6 +1,1 @@
-paho.mqtt.c
-subprojects/sol2
-subprojects/Catch2-2.13.7
-subprojects/packagecache
-subprojects/yaml_cpp
-subprojects/paho_mqtt
+target/**

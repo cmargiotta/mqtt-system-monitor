@@ -80,5 +80,6 @@
 		"shared_mutex": "cpp",
 		"typeindex": "cpp",
 		"cfenv": "cpp"
-	}
+	},
+	"editor.defaultFormatter": "statiolake.vscode-rustfmt"
 }

@@ -5,8 +5,11 @@
 
 ### MQTT Broker
 #   The MQTT broker address
-#   default: localhost:1883
-mqtt-broker: 'localhost:1883'
+mqtt-broker: 'localhost'
+### MQTT Broker port
+#   The MQTT broker port
+#   default: 1883
+#mqtt-broker-port: 1883
 #mqtt-user: ''
 #mqtt-password: ''
 
@@ -29,5 +32,5 @@ mqtt-broker: 'localhost:1883'
 
 ### Client ID
 #   the identifier of this machine, defaults to hostname
-#   default: ''
+#   default: hostname
 #client-id: ''

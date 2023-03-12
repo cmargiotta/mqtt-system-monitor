@@ -12,35 +12,26 @@
           overlays = [ devshell.overlay ];
           config.allowUnfree = true;
         };
-
       in
       rec {
-        nixConfig.sandbox = "relaxed";
         devShell = pkgs.devshell.mkShell {
-          name = "eenum";
+          name = "msm";
           bash = {
-            extra = ''
-              meson build > /dev/null
-            '';
             interactive = "";
           };
           commands = [
             {
               name = "build";
               help = "Build the project and run tests";
-              command = "ninja -C build test";
+              command = "cargo build";
             }
           ];
           env = [
           ];
-          packages =
-            with pkgs;
-            [
-              clang
-              cmake
-              ninja
-              meson
-            ];
+          packages = with pkgs; [
+            cargo
+            rustc
+          ];
         };
       });
 }
