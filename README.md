@@ -8,13 +8,10 @@ MSM is a daemon that periodically reads PC sensors values and publishes them on 
 ## Building from source
 
 ```console
-git clone https://github.com/cmargiotta/MQTT-System-Monitor --recursive
-cd MQTT-System-Monitor
-meson build
-ninja -C build test
+cargo build
 ```
 
-The executable will be placed in `build/src/msm`. 
+The executable will be placed in `build/src/msm`.
 
 To install msm, the systemd service, the default sensors and the default config.yml:
 
@@ -48,7 +45,7 @@ sensor.unit = "..." --The unit of the sensor (like %, °C, ...)
 sensor.class = "..." --The sensor class, important if you are using an MQTT subscriber
 ```
 
-For this sensor the value will be published on the topic: 
+For this sensor the value will be published on the topic:
 
 `prefix/client_id/sensor.class/sensor.id`
 

@@ -1,24 +1,21 @@
 use serde::Serialize;
 
-pub const DEFAULT_EXPIRE_AFTER: u32 = 60;
+pub const DEFAULT_EXPIRE_AFTER: u64 = 60;
 
 #[derive(Serialize)]
 pub struct DeviceDescriptor {
-    name: String,
-    model: String,
-    identifiers: String,
+    pub name: String,
+    pub model: String,
+    pub identifiers: String,
 }
 
 #[derive(Serialize)]
 pub struct Descriptor {
-    name: String,
-    class: String,
-    device: DeviceDescriptor,
-    expire_after: u32,
-    state_topic: String,
-    unique_id: String,
-}
-
-pub fn build_json(data: &Descriptor) -> Result<String, serde_json::Error> {
-    serde_json::to_string(&data)
+    pub name: String,
+    pub class: String,
+    pub unit_of_measurement: Option<String>,
+    pub device: DeviceDescriptor,
+    pub expire_after: u64,
+    pub state_topic: String,
+    pub unique_id: String,
 }

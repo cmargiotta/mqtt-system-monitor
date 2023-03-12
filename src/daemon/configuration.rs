@@ -7,7 +7,7 @@ pub struct Configuration {
     pub sensors: Vec<String>,
 
     #[serde(default = "default_update_period")]
-    pub update_period: u32,
+    pub update_period: u64,
     #[serde(default = "default_homeassistant")]
     pub homeassistant: bool,
 
@@ -23,10 +23,17 @@ pub struct Configuration {
     pub client_id: String,
     #[serde(default = "default_prefix")]
     pub prefix: String,
+
+    #[serde(default = "default_log_level", rename = "log-verbosity")]
+    pub log_verbosity: usize,
 }
 
-const fn default_update_period() -> u32 {
+const fn default_update_period() -> u64 {
     10
+}
+
+const fn default_log_level() -> usize {
+    2
 }
 
 const fn default_broker_port() -> u16 {
@@ -47,8 +54,9 @@ fn default_prefix() -> String {
 
 impl Configuration {
     pub fn load(path: &str) -> Result<Configuration, serde_yaml::Error> {
-        let yaml: String = std::fs::read_to_string(&path)
-            .expect("Should have been able to read the configuration");
+        let yaml: String = std::fs::read_to_string(&path).expect(
+            format!("Should have been able to read the configuration from {path}").as_str(),
+        );
 
         serde_yaml::from_str(&yaml)
     }
