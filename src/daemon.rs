@@ -7,6 +7,7 @@ use configuration::Configuration;
 use log::*;
 use rumqttc::{AsyncClient, MqttOptions, QoS};
 use tokio::task;
+use tokio::time::sleep;
 
 use self::sensor::home_assistant::DEFAULT_EXPIRE_AFTER;
 use self::sensor::message::Message;
@@ -107,7 +108,7 @@ impl Daemon {
                 cycles_counter += 1;
             }
 
-            std::thread::sleep(sleep_period);
+            sleep(sleep_period).await;
         }
 
         self.notify_state(&client, false).await;
