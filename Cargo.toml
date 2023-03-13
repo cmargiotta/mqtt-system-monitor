@@ -1,4 +1,5 @@
 [package]
+authors = ["Carmine Margiotta <cmargiotta@posteo.net>"]
 name = "mqtt-system-monitor"
 version = "0.1.0"
 edition = "2021"
@@ -7,6 +8,7 @@ readme = "README.md"
 publish = false
 
 [dependencies]
+cargo-deb = "1.42.2"
 gethostname = "0.4.1"
 log = "0.4.17"
 mlua = { version = "0.8.8", features = ["lua54", "vendored", "serialize"] }
@@ -16,3 +18,19 @@ serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 serde_yaml = "0.9"
 stderrlog = "0.5.4"
 tokio = { version = "1", features = ["full"] }
+
+[package.metadata.deb]
+copyright = "2023, Carmine Margiotta <cmargiotta@posteo.net>"
+extended-description = "A modular daemon that periodically reads PC sensors values and publishes them on an MQTT broker."
+depends = "$auto"
+section = "utility"
+priority = "optional"
+assets = [
+    ["default/*", "etc/msm", "644"],
+]
+conf-files = [
+    "etc/msm/config.yml",
+    "etc/msm/sensors/*"
+]
+maintainer-scripts = "systemd/"
+systemd-units = { enable = false }
