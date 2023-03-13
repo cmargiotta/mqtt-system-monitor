@@ -13,11 +13,15 @@ cargo build
 
 The executable will be placed in `build/src/msm`.
 
-To install msm, the systemd service, the default sensors and the default config.yml:
+To manually install msm, the systemd service, the default sensors and the default config.yml:
 
 ```console
-cd build
-sudo meson install
+sudo cp msm.service /usr/lib/systemd/system/
+sudo mkdir /etc/msm
+sudo cp -r default/* /etc/msm/
+
+sudo systemctl enable msm
+sudo systemctl start msm
 ```
 
 ## Configuration
@@ -26,7 +30,7 @@ The configuration is stored in `/etc/msm/config.yml` by default, but it is possi
 
 A default `config.yml` is provided in `default/config.yml`.
 
-The only required setting is `mqtt-broker`, that must be the full address of the MQTT broker.
+The only required setting is `mqtt-broker`, that must be the address of the MQTT broker.
 
 Other options are described in the default `config.yml`.
 
@@ -95,4 +99,4 @@ When `SIGINT` or `SIGKILL` is received the `Offline` state is published.
 
 ## License
 
-msm is distributed with a GNU General Public License. You can see LICENSE.txt for more info.
+msm is distributed with a MIT License. You can see LICENSE.md for more info.
