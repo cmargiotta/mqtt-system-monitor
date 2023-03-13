@@ -1,7 +1,0 @@
-update-period: 60
-
-mqtt-broker: 'localhost'
-
-sensors: [
-  'lua1', 'lua2'
-]

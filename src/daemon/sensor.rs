@@ -117,3 +117,36 @@ impl Sensor {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn lua_sensor() {
+        let code = String::from(
+            r#"
+                sensor.value = "test"
+                sensor.debug_message = ""
+                sensor.name = "Total memory"
+                sensor.id = "total_mem"
+                sensor.unit = "GB"
+                sensor.class = "None"
+            "#,
+        );
+
+        let mut sensor = Sensor::new(
+            String::from("test"),
+            code,
+            &String::from("prefix"),
+            &String::from("id"),
+        );
+
+        sensor.exec();
+
+        let message = sensor.get_message();
+
+        assert_eq!("prefix/id/None/total_mem", message.topic);
+        assert_eq!("test", message.value);
+    }
+}

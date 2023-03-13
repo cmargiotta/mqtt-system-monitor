@@ -1,5 +1,0 @@
-update-period: 60
-
-sensors: [
-  'lua1', 'lua2'
-]
